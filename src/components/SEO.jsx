@@ -33,7 +33,7 @@ export default function SEO({
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Frontend Interview Prep",
-    "url": "https://yourdomain.com",
+    "url": "https://devexam.netlify.app",
     "potentialAction": {
       "@type": "SearchAction",
       "target": "https://yourdomain.com/search?q={search_term_string}",
