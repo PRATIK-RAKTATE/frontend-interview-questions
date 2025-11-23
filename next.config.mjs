@@ -26,6 +26,7 @@ const nextConfig = {
     optimizeCss: true,
     scrollRestoration: true,
     gzipSize: true,
+    isrMemoryCacheSize: 0, // Use filesystem cache for better performance
   },
 
   // Environment variables for client-side (if needed for analytics)
@@ -158,11 +159,6 @@ const nextConfig = {
 
   // Trailing slash for consistent URLs
   trailingSlash: true,
-
-  // ISR configuration
-  experimental: {
-    isrMemoryCacheSize: 0, // Use filesystem cache for better performance
-  }
 }
 
 export default nextConfig

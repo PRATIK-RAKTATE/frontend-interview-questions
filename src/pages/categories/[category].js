@@ -1,5 +1,20 @@
 // pages/categories/[category].js
 import SEO from '../../components/SEO'
+import { getAllCategories, getQuestionsByCategory } from '@/lib/questions'
+
+export async function getStaticPaths() {
+  const categories = await getAllCategories()
+  
+  const paths = categories.map(cat => ({
+    params: { category: cat.slug }
+  }))
+
+  return {
+    paths,
+    fallback: 'blocking'
+  }
+}
+
 
 export default function CategoryPage({ category, questions }) {
   const categoryTitles = {

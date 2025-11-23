@@ -1,5 +1,7 @@
 // pages/sitemap.xml.js
-const WEBSITE_URL = 'https://yourdomain.com'
+import { getAllQuestions, getAllCategories } from "@/lib/questions"
+
+const WEBSITE_URL = process.env.SITE_URL || 'https://yourdomain.com'
 
 function generateSiteMap(questions, categories) {
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -21,7 +23,7 @@ function generateSiteMap(questions, categories) {
       ${questions.map(question => `
         <url>
           <loc>${WEBSITE_URL}/questions/${question.category}/${question.slug}</loc>
-          <lastmod>${question.updatedAt}</lastmod>
+          <lastmod>${question.updatedAt || new Date().toISOString()}</lastmod>
           <changefreq>monthly</changefreq>
           <priority>0.6</priority>
         </url>
@@ -31,14 +33,20 @@ function generateSiteMap(questions, categories) {
 }
 
 export async function getServerSideProps({ res }) {
-  const questions = await getAllQuestions()
-  const categories = await getAllCategories()
+  try {
+    const questions = await getAllQuestions()
+    const categories = await getAllCategories()
 
-  const sitemap = generateSiteMap(questions, categories)
+    const sitemap = generateSiteMap(questions, categories)
 
-  res.setHeader('Content-Type', 'text/xml')
-  res.write(sitemap)
-  res.end()
+    res.setHeader('Content-Type', 'text/xml')
+    res.write(sitemap)
+    res.end()
+  } catch (error) {
+    console.error('Error generating sitemap:', error)
+    res.statusCode = 500
+    res.end()
+  }
 
   return { props: {} }
 }
