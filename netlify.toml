@@ -1,0 +1,49 @@
+[build]
+  publish = "dist"
+
+[build.environment]
+  NODE_ENV = "production"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=31536000"
+
+# Redirects for SEO
+[[redirects]]
+  from = "/javascript-questions"
+  to = "/javascript-interview-questions"
+  status = 301
+
+[[redirects]]
+  from = "/react-questions"
+  to = "/react-interview-questions"
+  status = 301
+
+[[redirects]]
+  from = "/css-questions"
+  to = "/css-interview-questions"
+  status = 301
+
+[[redirects]]
+  from = "/html-questions"
+  to = "/html-interview-questions"
+  status = 301

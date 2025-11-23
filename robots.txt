@@ -1,0 +1,27 @@
+# https://devexam.netlify.app/robots.txt
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+
+# SEO directives
+Crawl-delay: 1
+Clean-param: ref /search/
+
+# Sitemaps
+Sitemap: https://devexam.netlify.app/sitemap.xml
+Sitemap: https://devexam.netlify.app/sitemap-questions.xml
+
+# Specific bots
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
